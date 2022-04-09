@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import { Ships } from "./components";
 
 function App() {

@@ -29,11 +29,6 @@ body {
   color: white;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 #ships {
   display: flex;
 	flex-direction: column;
@@ -51,28 +46,34 @@ code {
 
 .shipPanel {
   display: flex;
-  flex-wrap: wrap;
-	justify-content: center;
+	overflow: auto;
+	margin: 40px 40px 80px 40px;
+	padding-bottom: 20px;
+
+	scrollbar-color: white;
 }
 
 .tile {
   background: rgba(255, 255, 255, 0.5);
-  min-width: 20%;
-	max-width: 312px;
-  height: auto;
-  border-radius: 5px;
+	min-width: 300px;
+  border-radius: 15px;
   margin: 6px;
-  padding: 6px;
+	overflow: hidden;
 }
 
-.rocketName > p, h2 {
+.shipName > p, h2 {
   font-family: "Comfortaa";
 	margin-block-start: 8px;
 	margin-block-end: 4px;
 }
 
-.rocketInfo {
-  margin: 4px 0;
+.shipUrl {
+	color: black;
+
+}
+
+.shipInfo {
+  margin: 8px;
 }
 
 img {
@@ -86,6 +87,10 @@ ul {
 
 figure {
   margin-inline: 0;
-	margin-block-start: 4px;
-	margin-block-end: 4px;
+	margin-block-start: 0;
+	margin-block-end: 0;
+}
+
+figcaption {
+	padding-left: 8px;
 }

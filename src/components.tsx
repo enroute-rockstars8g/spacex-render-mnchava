@@ -16,7 +16,9 @@ export const Ships: FC = () => {
       </button>
       <div className="shipPanel">
         {ships !== undefined
-          ? ships.map((ship: Ship, i: number) => ShipTile(ship, i))
+          ? ships
+              .filter((s: Ship) => s.image)
+              .map((ship: Ship, i: number) => ShipTile(ship, i))
           : null}
       </div>
     </div>
@@ -26,20 +28,35 @@ export const Ships: FC = () => {
 const ShipTile = (s: Ship, id: number) => {
   return (
     <div key={`ship-${id}`} className="tile">
-      <h2 className="rocketName">
-        <p>{s.name}</p>
-      </h2>
       {s.image !== "" ? (
         <figure>
           <img src={s.image} alt="" className="shipImage" />
           <figcaption>{s.model}</figcaption>
         </figure>
       ) : null}
-      <ul>
-        <li>Built: {s.year_built || "-"}</li>
-        <li>Class: {s.class || "-"}</li>
-        <li>Landings: {s.successful_landings || 0}</li>
-      </ul>
+      <div className="shipInfo">
+        <h2 className="shipName">
+          <p>
+            <a href={s.url} className="shipUrl">
+              {s.name}
+            </a>
+          </p>
+        </h2>
+        <ul>
+          <li>Built: {s.year_built || "-"}</li>
+          <li>{s.missions.length || "0"} missions</li>
+          <li>
+            Type: {s.type || "-"}
+            {s.type === "Barge" ? (
+              <i>
+                {" "}
+                {s.successful_landings}/{s.attempted_landings} landings
+              </i>
+            ) : null}
+          </li>
+          <li>Roles: {s.roles.join(", ") || "-"}</li>
+        </ul>
+      </div>
     </div>
   );
 };
