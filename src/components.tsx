@@ -1,37 +1,5 @@
 import React, { FC, useState } from "react";
-import { getRockets, getShips } from "./services";
-
-export const Rockets: FC = () => {
-  const [rockets, setRockets] = useState<any>(undefined);
-
-  const fetchRockets = async () => {
-    const res = await getRockets();
-    setRockets(res);
-  };
-
-  return (
-    <div id="rockets">
-      <div className="leftPanel">
-        <button onClick={fetchRockets}>See Rockets</button>
-      </div>
-      <div className="rightPanel">
-        {rockets !== undefined
-          ? rockets.map((rocket: Rocket, i: number) => RocketTile(rocket, i))
-          : null}
-      </div>
-    </div>
-  );
-};
-
-const RocketTile = (r: Rocket, id: number) => {
-  return (
-    <div id="rocket" key={`rocket-${id}`} className="tile">
-      <h2 className="rocketName">{r.name}</h2>
-      <p className="rocketInfo">First flight: {r.first_flight}</p>
-      <p className="rocketInfo">Height: {r.height.meters}</p>
-    </div>
-  );
-};
+import { getShips } from "./services";
 
 export const Ships: FC = () => {
   const [ships, setShips] = useState<any>(undefined);
@@ -43,10 +11,10 @@ export const Ships: FC = () => {
 
   return (
     <div id="ships">
-      <div className="leftPanel">
-        <button onClick={fetchShips}>See Ships</button>
-      </div>
-      <div className="rightPanel">
+      <button onClick={fetchShips} className="fetchButton">
+        See Ships
+      </button>
+      <div className="shipPanel">
         {ships !== undefined
           ? ships.map((ship: Ship, i: number) => ShipTile(ship, i))
           : null}
@@ -57,8 +25,10 @@ export const Ships: FC = () => {
 
 const ShipTile = (s: Ship, id: number) => {
   return (
-    <div id="ship" key={`ship-${id}`} className="tile">
-      <h2 className="rocketName">{s.name}</h2>
+    <div key={`ship-${id}`} className="tile">
+      <h2 className="rocketName">
+        <p>{s.name}</p>
+      </h2>
       {s.image !== "" ? (
         <figure>
           <img src={s.image} alt="" className="shipImage" />
